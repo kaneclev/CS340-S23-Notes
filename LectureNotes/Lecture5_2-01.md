@@ -1,14 +1,6 @@
 # Lecture 5: Shell Scripting
 ## 2/01/23
 
-**Warm Up/Review:**
-1. Find if you have an existing TMUX session.
-2. Reattach to it, or create a new one if necessary.
-3. Set up three TMUX panes. For one of each of the three panes:
-    - Show the scripts we made lasts class and that they are executable.
-    - Run help read | less
-    - Show an example of 'read' saving data to a variable called 'foo'.
-
 ### **Scripting 'covid.sh':**  
 In the last lecture, we worked on a shell script called 'covid.sh'.  
 The purpose of our 'covid.sh' script is to collect COVID data from the New York Times,  
@@ -30,20 +22,6 @@ less $temp_file
 #clean up the temporary file
 rm $temp_file
 ```
-**Reading and Returning State Data**  
-
-Suppose we want the user to specify the state they want to be shown data for.  
-In this case, we can use the *read* command to prompt the user for input.  
-Then, lets use *grep* to find the state from temp_file and return the proper data to the user.  
-
-In place of *less*, we can implement the following:  
-```
-echo "enter a state: "
-read state
-echo "COVID cases and deaths for $state: "
-grep "$state" "$temp_file"
-```
-However, instead of this method, we will use *command line arguments*.
 
 **Using Command Line Arguments in BASH**  
 Arguments come after the executable and are an array of strings.  
@@ -92,13 +70,6 @@ Currently, our script can output COVID data representing the total cases/deaths 
 but we can modify it to instead represent daily change using a *for-loop* and some math.  
 
 We can use double parentheses to perform math operations, like (($variable)), or ((number)).  
-To calculate the day-to-day change in data, we need the following:  
-```
-prev_cases=((0))
-prev_deaths=((0))
-```
-
-Now, let's add our for-loop and math to calculate the change per day.
 
 ```
 # for each entry in our file, specifying which state and which columns we want, let's loop
